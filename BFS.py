@@ -1,4 +1,4 @@
-from turtle import clear
+from turtle import clear, done
 from graphics import *
 import time
 import random as rand
@@ -144,15 +144,14 @@ def initnewgoal():
    global xEnd
    global yEnd
    print("masuk new goal\n")
-   temp1 = xEnd
-   temp2 = yEnd
+   xBegin = xEnd
+   yBegin = yEnd
    xEnd = rand.randint(1,10)
    yEnd = rand.randint(1,10)
-   xBegin = temp1
-   yBegin = temp2
    checkEnd = (yEnd,xEnd)
    checkStart = (xBegin,yBegin)
-   while(check(wallsList, checkEnd, checkStart)):
+   if(check(wallsList, checkEnd, checkStart)):
+      print("masuk while\n")
       # print("masuk wa\n")
       xEnd = rand.randint(1,10)
       yEnd = rand.randint(1,10)
@@ -294,8 +293,6 @@ def colorPathBlack():
       rect1.setFill(color_rgb(255,0,0))
       rect1.draw(win)
 
-
-
 def movePackMan():
    for i in range(0, len(path) - 1):
       time.sleep(0.1)
@@ -313,15 +310,31 @@ def movePackMan():
 def main():
    initfirstgoal()
    initializeGame()
-   for i in range (1,2):
+   for i in range (1,3):
+      print(i)
+      if i == 1:
+         print("masuk firstgoal\n")
+         initfirstgoal()
+         print("masuk initgame\n")
+         initializeGame()
+      else:
+         print("masuk newgoal\n")
+         initnewgoal()
+         print("keluar newgoal\n")
+         print("masuk clear\n")
+         clear()
+         print("masuk initgame\n")
+         initializeGame()
+      print("masuk adj\n")
       createAdjencyDict()
+      print("masuk expl\n")
       explore(startPoint)
+      print("masuk pathback\n")
       getPathBacktracking()
       # colorPathBlack()
+      print("masuk movpac\n")
       movePackMan()
-      initnewgoal()
-      clear()
-      initializeGame()
+      print("keluar movpac\n")
    
    #getMounse() + close(): It wait untilsomeone clicks and doing so closes it
    win.getMouse()
