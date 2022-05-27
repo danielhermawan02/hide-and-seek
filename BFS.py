@@ -92,10 +92,10 @@ def clear():
    path = []
    visitQueue = []
 
-def check(list1, val1, val2):  
+def check(list1, val):  
    # traverse in the list
    for x in list1:
-      if val1 == x or val2 == x:
+      if val == x:
          return True 
    return False
 
@@ -115,7 +115,7 @@ def initfirstgoal():
    yEnd = rand.randint(1,10)
    checkEnd = (yEnd,xEnd)
    checkStart = (xBegin,yBegin)
-   while(check(wallsList, checkEnd, checkStart)):
+   while(check(wallsList, checkEnd) or check(wallsList,checkStart)):
       # print("masuk wa\n")
       xBegin = rand.randint(1,10)
       yBegin = rand.randint(1,10)
@@ -150,7 +150,7 @@ def initnewgoal():
    yEnd = rand.randint(1,10)
    checkEnd = (yEnd,xEnd)
    checkStart = (xBegin,yBegin)
-   if(check(wallsList, checkEnd, checkStart)):
+   while(check(wallsList, checkEnd)):
       print("masuk while\n")
       # print("masuk wa\n")
       xEnd = rand.randint(1,10)
@@ -308,13 +308,12 @@ def movePackMan():
       
 
 def main():
-   initfirstgoal()
-   initializeGame()
-   for i in range (1,3):
+   for i in range (1,5):
       print(i)
       if i == 1:
          print("masuk firstgoal\n")
          initfirstgoal()
+         clear()
          print("masuk initgame\n")
          initializeGame()
       else:
